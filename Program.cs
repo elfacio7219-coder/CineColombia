@@ -1,5 +1,8 @@
-﻿
-Console.WriteLine("Hello, World!");
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+Console.WriteLine("Cine Colombia");
 
 public class Cine
 {
