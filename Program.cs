@@ -7,10 +7,10 @@ Console.WriteLine("Cine Colombia");
 public class Cine
 {
     public int cineId { get; set; }
-    public string nombre { get; set; }
-    public string direccion { get; set; }
-    public string telefono { get; set; }
-    public string email { get; set; }
+    public string? nombre { get; set; }
+    public string? direccion { get; set; }
+    public string? telefono { get; set; }
+    public string? email { get; set; }
 
     // Listas
     public List<Sala> salas { get; set; }
@@ -21,10 +21,10 @@ public class Cine
 public class Cliente
 {
     public int clienteId { get; set; }
-    public string nombre { get; set; }
-    public string apellido { get; set; }
-    public string email { get; set; }
-    public string telefono { get; set; }
+    public string? nombre { get; set; }
+    public string? apellido { get; set; }
+    public string? email { get; set; }
+    public string? telefono { get; set; }
     public DateTime fechaNacimiento { get; set; }
 
     // FK
@@ -39,9 +39,9 @@ public class Cliente
 public class Empleado
 {
     public int empleadoId { get; set; }
-    public string nombre { get; set; }
-    public string apellido { get; set; }
-    public string cargo { get; set; }
+    public string? nombre { get; set; }
+    public string? apellido { get; set; }
+    public string? cargo { get; set; }
     public decimal salario { get; set; }
     public DateTime fechaContratacion { get; set; }
 
@@ -56,9 +56,9 @@ public class Empleado
 public class Sala
 {
     public int salaId { get; set; }
-    public string nombre { get; set; }
+    public string? nombre { get; set; }
     public int capacidad { get; set; }
-    public string tipo { get; set; } // 2D, 3D, IMAX
+    public string? tipo { get; set; } // 2D, 3D, IMAX
 
     // FK
     public int cineId { get; set; }
@@ -72,9 +72,9 @@ public class Sala
 public class Asiento
 {
     public int asientoId { get; set; }
-    public string fila { get; set; }
+    public string? fila { get; set; }
     public int numero { get; set; }
-    public string tipo { get; set; } // Normal, VIP, Preferencial
+    public string? tipo { get; set; } // Normal, VIP, Preferencial
     public bool disponible { get; set; }
 
     // FK
@@ -88,13 +88,13 @@ public class Asiento
 public class Pelicula
 {
     public int peliculaId { get; set; }
-    public string titulo { get; set; }
-    public string director { get; set; }
+    public string? titulo { get; set; }
+    public string? director { get; set; }
     public int duracion { get; set; } // en minutos
-    public string clasificacion { get; set; }
+    public string? clasificacion { get; set; }
     public DateTime fechaEstreno { get; set; }
-    public string sinopsis { get; set; }
-    public string idioma { get; set; }
+    public string? sinopsis { get; set; }
+    public string? idioma { get; set; }
 
     // FK
     public int generoId { get; set; }
@@ -107,7 +107,7 @@ public class Pelicula
 public class Genero
 {
     public int generoId { get; set; }
-    public string nombre { get; set; }
+    public string? nombre { get; set; }
     public string descripcion { get; set; }
 
     // Listas
@@ -118,8 +118,8 @@ public class Funcion
 {
     public int funcionId { get; set; }
     public DateTime fechaHora { get; set; }
-    public string formato { get; set; } // 2D, 3D, IMAX
-    public string idioma { get; set; } // Doblada, Subtitulada
+    public string? formato { get; set; } // 2D, 3D, IMAX
+    public string? idioma { get; set; } // Doblada, Subtitulada
     public bool activa { get; set; }
 
     // FK
@@ -140,7 +140,7 @@ public class Funcion
 public class Boleto
 {
     public int boletoId { get; set; }
-    public string codigoQR { get; set; }
+    public string? codigoQR { get; set; }
     public decimal precioFinal { get; set; }
     public DateTime fechaEmision { get; set; }
     public bool usado { get; set; }
@@ -164,7 +164,7 @@ public class Reserva
     public int reservaId { get; set; }
     public DateTime fechaReserva { get; set; }
     public DateTime fechaExpiracion { get; set; }
-    public string estado { get; set; } // Pendiente, Confirmada, Cancelada
+    public string? estado { get; set; } // Pendiente, Confirmada, Cancelada
 
     // FK
     public int clienteId { get; set; }
@@ -182,7 +182,7 @@ public class Venta
     public int ventaId { get; set; }
     public DateTime fechaVenta { get; set; }
     public decimal total { get; set; }
-    public string canal { get; set; } // Taquilla, Web, App
+    public string? canal { get; set; } // Taquilla, Web, App
 
     // FK
     public int clienteId { get; set; }
@@ -204,10 +204,10 @@ public class Pago
 {
     public int pagoId { get; set; }
     public decimal monto { get; set; }
-    public string metodoPago { get; set; } // Efectivo, Tarjeta, Digital
+    public string? metodoPago { get; set; } // Efectivo, Tarjeta, Digital
     public DateTime fechaPago { get; set; }
-    public string estado { get; set; } // Aprobado, Rechazado, Pendiente
-    public string referencia { get; set; }
+    public string? estado { get; set; } // Aprobado, Rechazado, Pendiente
+    public string? referencia { get; set; }
 
     // FK
     public int? promocionId { get; set; }
@@ -220,13 +220,13 @@ public class Pago
 public class Factura
 {
     public int facturaId { get; set; }
-    public string numeroFactura { get; set; }
+    public string? numeroFactura { get; set; }
     public DateTime fechaEmision { get; set; }
     public decimal subtotal { get; set; }
     public decimal impuestos { get; set; }
     public decimal total { get; set; }
-    public string razonSocial { get; set; }
-    public string nit { get; set; }
+    public string? razonSocial { get; set; }
+    public string? nit { get; set; }
 
     // FK
     public int ventaId { get; set; }
@@ -236,8 +236,8 @@ public class Factura
 public class Promocion
 {
     public int promocionId { get; set; }
-    public string nombre { get; set; }
-    public string descripcion { get; set; }
+    public string? nombre { get; set; }
+    public string? descripcion { get; set; }
     public DateTime fechaInicio { get; set; }
     public DateTime fechaFin { get; set; }
     public bool activa { get; set; }
@@ -250,9 +250,9 @@ public class Promocion
 public class Descuento
 {
     public int descuentoId { get; set; }
-    public string tipo { get; set; } // Porcentaje, Monto fijo
+    public string? tipo { get; set; } // Porcentaje, Monto fijo
     public decimal valor { get; set; }
-    public string condicion { get; set; } // Estudiante, Tercera edad, etc.
+    public string? condicion { get; set; } // Estudiante, Tercera edad, etc.
 
     // FK
     public int promocionId { get; set; }
@@ -265,10 +265,10 @@ public class Descuento
 public class Tarifa
 {
     public int tarifaId { get; set; }
-    public string nombre { get; set; }
+    public string? nombre { get; set; }
     public decimal precioBase { get; set; }
-    public string diaSemana { get; set; } // Lunes-Viernes, Fin de semana
-    public string horarioTipo { get; set; } // Matiné, Normal, Nocturna
+    public string? diaSemana { get; set; } // Lunes-Viernes, Fin de semana
+    public string? horarioTipo { get; set; } // Matiné, Normal, Nocturna
 
     // Listas
     public List<Funcion> funciones { get; set; }
@@ -277,8 +277,8 @@ public class Tarifa
 public class Confiteria
 {
     public int confiteriaId { get; set; }
-    public string nombre { get; set; }
-    public string ubicacion { get; set; }
+    public string? nombre { get; set; }
+    public string? ubicacion { get; set; }
 
     // FK
     public int cineId { get; set; }
@@ -292,10 +292,10 @@ public class Confiteria
 public class Producto
 {
     public int productoId { get; set; }
-    public string nombre { get; set; }
-    public string descripcion { get; set; }
+    public string? nombre { get; set; }
+    public string? descripcion { get; set; }
     public decimal precio { get; set; }
-    public string categoria { get; set; } // Bebida, Comida, Combo
+    public string? categoria { get; set; } // Bebida, Comida, Combo
     public bool disponible { get; set; }
 
     // FK
@@ -325,7 +325,7 @@ public class Inventario
 public class Membresia
 {
     public int membresiaId { get; set; }
-    public string tipo { get; set; } // Básica, Premium, Gold
+    public string? tipo { get; set; } // Básica, Premium, Gold
     public decimal precioAnual { get; set; }
     public int puntosAcumulados { get; set; }
     public DateTime fechaInicio { get; set; }
