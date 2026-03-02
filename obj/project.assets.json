@@ -8,19 +8,19 @@
     "net10.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Fabricio Sanchez\\.nuget\\packages\\": {}
+    "C:\\Users\\xilen\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Fabricio Sanchez\\OneDrive\\Desktop\\cine_colombia\\cine_colombia.csproj",
-      "projectName": "cine_colombia",
-      "projectPath": "C:\\Users\\Fabricio Sanchez\\OneDrive\\Desktop\\cine_colombia\\cine_colombia.csproj",
-      "packagesPath": "C:\\Users\\Fabricio Sanchez\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Fabricio Sanchez\\OneDrive\\Desktop\\cine_colombia\\obj\\",
+      "projectUniqueName": "E:\\Programación software\\Parcial1_\\CineColombia\\CineColombia.csproj",
+      "projectName": "CineColombia",
+      "projectPath": "E:\\Programación software\\Parcial1_\\CineColombia\\CineColombia.csproj",
+      "packagesPath": "C:\\Users\\xilen\\.nuget\\packages\\",
+      "outputPath": "E:\\Programación software\\Parcial1_\\CineColombia\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Fabricio Sanchez\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\xilen\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net10.0"
