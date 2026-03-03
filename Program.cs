@@ -1,10 +1,10 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
 Console.WriteLine("Cine Colombia");
 
-public class Cine
+public class Cines
 {
     public int cineId { get; set; }
     public string? nombre { get; set; }
@@ -18,7 +18,7 @@ public class Cine
     public List<Confiteria> confiterias { get; set; }
 }
 
-public class Cliente
+public class Clientes
 {
     public int clienteId { get; set; }
     public string? nombre { get; set; }
@@ -36,7 +36,7 @@ public class Cliente
     public List<Venta> ventas { get; set; }
 }
 
-public class Empleado
+public class Empleados
 {
     public int empleadoId { get; set; }
     public string? nombre { get; set; }
@@ -53,7 +53,7 @@ public class Empleado
     public List<Venta> ventas { get; set; }
 }
 
-public class Sala
+public class Salas
 {
     public int salaId { get; set; }
     public string? nombre { get; set; }
@@ -62,14 +62,14 @@ public class Sala
 
     // FK
     public int cineId { get; set; }
-    public Cine cine { get; set; }
+    public Cines cine { get; set; }
 
     // Listas
     public List<Asiento> asientos { get; set; }
     public List<Funcion> funciones { get; set; }
 }
 
-public class Asiento
+public class Asientos
 {
     public int asientoId { get; set; }
     public string? fila { get; set; }
@@ -85,7 +85,7 @@ public class Asiento
     public List<Boleto> boletos { get; set; }
 }
 
-public class Pelicula
+public class Peliculas
 {
     public int peliculaId { get; set; }
     public string? titulo { get; set; }
@@ -104,7 +104,7 @@ public class Pelicula
     public List<Funcion> funciones { get; set; }
 }
 
-public class Genero
+public class Generos
 {
     public int generoId { get; set; }
     public string? nombre { get; set; }
@@ -114,7 +114,7 @@ public class Genero
     public List<Pelicula> peliculas { get; set; }
 }
 
-public class Funcion
+public class Funciones
 {
     public int funcionId { get; set; }
     public DateTime fechaHora { get; set; }
@@ -137,10 +137,15 @@ public class Funcion
     public List<Reserva> reservas { get; set; }
 }
 
-public class Boleto
+public class Boletos
 {
+    public decimal CalcularPrecioFinal()
+    {
+       return precioBase - descuento.valor; 
+    }
     public int boletoId { get; set; }
     public string? codigoQR { get; set; }
+    public decimal precioBase {get; set;}
     public decimal precioFinal { get; set; }
     public DateTime fechaEmision { get; set; }
     public bool usado { get; set; }
@@ -159,7 +164,7 @@ public class Boleto
     public Venta venta { get; set; }
 }
 
-public class Reserva
+public class Reservas
 {
     public int reservaId { get; set; }
     public DateTime fechaReserva { get; set; }
@@ -177,8 +182,29 @@ public class Reserva
     public List<Boleto> boletos { get; set; }
 }
 
-public class Venta
+public class ventas
+
 {
+        public decimal CalcularTotal()
+{
+        decimal total = 0;  //acumulador
+        if (boletos != null) 
+        {
+            foreach (var b in boletos) //recorre la lista
+        {
+            total += b.CalcularPrecioFinal(); //// Se llama al método del boleto que calcula su precio final y acumula
+        }
+        }
+        if (productos != null) 
+        {
+            foreach (var p in productos) 
+            {
+                total += p.precio; // Se suma el precio del producto al total.
+            }
+            }
+            return total; 
+}
+
     public int ventaId { get; set; }
     public DateTime fechaVenta { get; set; }
     public decimal total { get; set; }
@@ -198,9 +224,10 @@ public class Venta
     public List<Boleto> boletos { get; set; }
     public List<Producto> productos { get; set; }
     public Factura factura { get; set; }
+    
 }
 
-public class Pago
+public class Pagos
 {
     public int pagoId { get; set; }
     public decimal monto { get; set; }
@@ -217,7 +244,7 @@ public class Pago
     public List<Venta> ventas { get; set; }
 }
 
-public class Factura
+public class Facturas
 {
     public int facturaId { get; set; }
     public string? numeroFactura { get; set; }
@@ -233,7 +260,7 @@ public class Factura
     public Venta venta { get; set; }
 }
 
-public class Promocion
+public class Promociones
 {
     public int promocionId { get; set; }
     public string? nombre { get; set; }
@@ -247,7 +274,7 @@ public class Promocion
     public List<Pago> pagos { get; set; }
 }
 
-public class Descuento
+public class Descuentos
 {
     public int descuentoId { get; set; }
     public string? tipo { get; set; } // Porcentaje, Monto fijo
@@ -262,7 +289,7 @@ public class Descuento
     public List<Boleto> boletos { get; set; }
 }
 
-public class Tarifa
+public class Tarifas
 {
     public int tarifaId { get; set; }
     public string? nombre { get; set; }
@@ -274,7 +301,7 @@ public class Tarifa
     public List<Funcion> funciones { get; set; }
 }
 
-public class Confiteria
+public class Confiterias
 {
     public int confiteriaId { get; set; }
     public string? nombre { get; set; }
@@ -289,7 +316,7 @@ public class Confiteria
     public List<Inventario> inventarios { get; set; }
 }
 
-public class Producto
+public class Productos
 {
     public int productoId { get; set; }
     public string? nombre { get; set; }
@@ -307,7 +334,7 @@ public class Producto
     public List<Venta> ventas { get; set; }
 }
 
-public class Inventario
+public class Inventarios
 {
     public int inventarioId { get; set; }
     public int cantidadDisponible { get; set; }
@@ -322,7 +349,7 @@ public class Inventario
     public Confiteria confiteria { get; set; }
 }
 
-public class Membresia
+public class Membresias
 {
     public int membresiaId { get; set; }
     public string? tipo { get; set; } // Básica, Premium, Gold
@@ -336,3 +363,4 @@ public class Membresia
     public List<Cliente> clientes { get; set; }
     public List<Descuento> descuentos { get; set; }
 }
+
