@@ -27,30 +27,32 @@ public class Clientes
     public DateTime fechaNacimiento { get; set; }
 
     public int? membresiaId { get; set; }
-    public Membresias membresia { get; set; }
+    public Membresias? membresia { get; set; }
 
     public List<Reservas> reservas { get; set; }
     public List<Ventas> ventas { get; set; }
 
     public int Edad()
     {
-        var hoy = DateTime.Today;
-        int edad = hoy.Year - fechaNacimiento.Year;
-        if (fechaNacimiento.Date > hoy.AddYears(-edad)) edad--;
+        int edad = DateTime.Today.Year - fechaNacimiento.Year;
+        if (fechaNacimiento.Date > DateTime.Today.AddYears(-edad)) edad--;
         return edad;
     }
 
     public bool EsMayorDeEdad()
-        => Edad() >= 18;
+    {
+        return Edad() >= 18;
+    }
 
     public bool EsTerceraEdad()
-        => Edad() >= 60;
+    {
+        return Edad() >= 60;
+    }
 
     public decimal TotalGastado()
-        => ventas?.Sum(v => v.CalcularTotal()) ?? 0;
-
-    public int TotalCompras()
-        => ventas?.Count ?? 0;
+    {
+        return ventas?.Sum(v => v.CalcularTotal()) ?? 0;
+    }
 }
 
 public class Empleados
@@ -63,7 +65,7 @@ public class Empleados
     public DateTime fechaContratacion { get; set; }
 
     public int cineId { get; set; }
-    public Cines cine { get; set; }
+    public Cines? cine { get; set; }
 
     public List<Ventas> ventas { get; set; }
 }
@@ -76,13 +78,15 @@ public class Salas
     public string? tipo { get; set; } // 2D, 3D, IMAX
 
     public int cineId { get; set; }
-    public Cines cine { get; set; }
+    public Cines? cine { get; set; }
 
     public List<Asientos> asientos { get; set; }
     public List<Funciones> funciones { get; set; }
 
     public int AsientosDisponibles()
-        => asientos?.Count(a => a.disponible) ?? 0;
+    {
+        return asientos?.Count(a => a.disponible) ?? 0;
+    }
 
     public double PorcentajeOcupacion()
     {
@@ -92,7 +96,9 @@ public class Salas
     }
 
     public List<Asientos> AsientosPorTipo(string tipo)
-        => asientos?.Where(a => a.tipo == tipo).ToList() ?? new List<Asientos>();
+    {
+        return asientos?.Where(a => a.tipo == tipo).ToList() ?? new List<Asientos>();
+    }
 }
 
 public class Asientos
@@ -104,7 +110,7 @@ public class Asientos
     public bool disponible { get; set; }
 
     public int salaId { get; set; }
-    public Salas sala { get; set; }
+    public Salas? sala { get; set; }
 
     public List<Boletos> boletos { get; set; }
 }
@@ -121,7 +127,7 @@ public class Peliculas
     public string? idioma { get; set; }
 
     public int generoId { get; set; }
-    public Generos genero { get; set; }
+    public Generos? genero { get; set; }
 
     public List<Funciones> funciones { get; set; }
 
@@ -129,21 +135,22 @@ public class Peliculas
     {
         int horas = duracion / 60;
         int minutos = duracion % 60;
-        return horas > 0 ? $"{horas} h {minutos} min" : $"{minutos} min";
+        if (horas > 0)
+            return horas + " h " + minutos + " min";
+        return minutos + " min";
     }
 
     public bool YaEstrenada()
-        => DateTime.Now >= fechaEstreno;
-
-    public int DiasDesdEstreno()
-        => (DateTime.Now - fechaEstreno).Days;
+    {
+        return DateTime.Now >= fechaEstreno;
+    }
 }
 
 public class Generos
 {
     public int generoId { get; set; }
     public string? nombre { get; set; }
-    public string descripcion { get; set; }
+    public string? descripcion { get; set; }
 
     public List<Peliculas> peliculas { get; set; }
 }
@@ -157,32 +164,37 @@ public class Funciones
     public bool activa { get; set; }
 
     public int peliculaId { get; set; }
-    public Peliculas pelicula { get; set; }
+    public Peliculas? pelicula { get; set; }
 
     public int salaId { get; set; }
-    public Salas sala { get; set; }
+    public Salas? sala { get; set; }
 
     public int tarifaId { get; set; }
-    public Tarifas tarifa { get; set; }
+    public Tarifas? tarifa { get; set; }
 
     public List<Boletos> boletos { get; set; }
     public List<Reservas> reservas { get; set; }
 
+    public int AsientosDisponibles(int capacidadSala)
+    {
+        return capacidadSala - (boletos?.Count ?? 0);
+    }
+
     public double PorcentajeOcupacion(int capacidadSala)
     {
         if (capacidadSala <= 0) return 0;
-        int boletosVendidos = boletos?.Count ?? 0;
-        return (double)boletosVendidos / capacidadSala * 100;
+        return (double)(boletos?.Count ?? 0) / capacidadSala * 100;
     }
 
-    public int AsientosDisponibles(int capacidadSala)
-        => capacidadSala - (boletos?.Count ?? 0);
-
     public bool YaComenzo()
-        => DateTime.Now >= fechaHora;
+    {
+        return DateTime.Now >= fechaHora;
+    }
 
     public decimal IngresosTotal()
-        => boletos?.Sum(b => b.CalcularPrecioFinal()) ?? 0;
+    {
+        return boletos?.Sum(b => b.CalcularPrecioFinal()) ?? 0;
+    }
 }
 
 public class Boletos
@@ -195,16 +207,16 @@ public class Boletos
     public bool usado { get; set; }
 
     public int funcionId { get; set; }
-    public Funciones funcion { get; set; }
+    public Funciones? funcion { get; set; }
 
     public int asientoId { get; set; }
-    public Asientos asiento { get; set; }
+    public Asientos? asiento { get; set; }
 
     public int? descuentoId { get; set; }
-    public Descuentos descuento { get; set; }
+    public Descuentos? descuento { get; set; }
 
     public int? ventaId { get; set; }
-    public Ventas venta { get; set; }
+    public Ventas? venta { get; set; }
 
     public decimal CalcularPrecioFinal()
     {
@@ -212,7 +224,7 @@ public class Boletos
             return precioBase;
 
         if (descuento.tipo == "Porcentaje")
-            return precioBase - (precioBase * (descuento.valor / 100));
+            return precioBase - (precioBase * descuento.valor / 100);
 
         if (descuento.tipo == "Monto fijo")
             return Math.Max(0, precioBase - descuento.valor);
@@ -221,7 +233,9 @@ public class Boletos
     }
 
     public bool EstaVencido(int horasGracia = 2)
-        => !usado && DateTime.Now > fechaEmision.AddHours(horasGracia);
+    {
+        return !usado && DateTime.Now > fechaEmision.AddHours(horasGracia);
+    }
 }
 
 public class Reservas
@@ -232,21 +246,27 @@ public class Reservas
     public string? estado { get; set; } // Pendiente, Confirmada, Cancelada
 
     public int clienteId { get; set; }
-    public Clientes cliente { get; set; }
+    public Clientes? cliente { get; set; }
 
     public int funcionId { get; set; }
-    public Funciones funcion { get; set; }
+    public Funciones? funcion { get; set; }
 
     public List<Boletos> boletos { get; set; }
 
     public bool EstaVigente()
-        => estado == "Pendiente" && DateTime.Now <= fechaExpiracion;
+    {
+        return estado == "Pendiente" && DateTime.Now <= fechaExpiracion;
+    }
 
     public int CantidadBoletos()
-        => boletos?.Count ?? 0;
+    {
+        return boletos?.Count ?? 0;
+    }
 
     public decimal TotalEstimado()
-        => boletos?.Sum(b => b.precioBase) ?? 0;
+    {
+        return boletos?.Sum(b => b.precioBase) ?? 0;
+    }
 }
 
 public class Ventas
@@ -257,17 +277,17 @@ public class Ventas
     public string? canal { get; set; } // Taquilla, Web, App
 
     public int clienteId { get; set; }
-    public Clientes cliente { get; set; }
+    public Clientes? cliente { get; set; }
 
     public int empleadoId { get; set; }
-    public Empleados empleado { get; set; }
+    public Empleados? empleado { get; set; }
 
     public int pagoId { get; set; }
-    public Pagos pago { get; set; }
+    public Pagos? pago { get; set; }
 
     public List<Boletos> boletos { get; set; }
     public List<Productos> productos { get; set; }
-    public Facturas factura { get; set; }
+    public Facturas? factura { get; set; }
 
     public decimal CalcularTotal()
     {
@@ -285,13 +305,14 @@ public class Ventas
     }
 
     public decimal SubtotalBoletos()
-        => boletos?.Sum(b => b.CalcularPrecioFinal()) ?? 0;
+    {
+        return boletos?.Sum(b => b.CalcularPrecioFinal()) ?? 0;
+    }
 
     public decimal SubtotalConfiteria()
-        => productos?.Sum(p => p.precio) ?? 0;
-
-    public int CantidadBoletos()
-        => boletos?.Count ?? 0;
+    {
+        return productos?.Sum(p => p.precio) ?? 0;
+    }
 }
 
 public class Pagos
@@ -304,24 +325,25 @@ public class Pagos
     public string? referencia { get; set; }
 
     public int? promocionId { get; set; }
-    public Promociones promocion { get; set; }
+    public Promociones? promocion { get; set; }
 
     public List<Ventas> ventas { get; set; }
 
     public bool FueAprobado()
-        => estado == "Aprobado";
-
-    public decimal TotalVentas()
-        => ventas?.Sum(v => v.CalcularTotal()) ?? 0;
+    {
+        return estado == "Aprobado";
+    }
 
     public decimal CalcularCambio(decimal montoEntregado)
-        => metodoPago == "Efectivo" ? Math.Max(0, montoEntregado - monto) : 0;
+    {
+        if (metodoPago == "Efectivo")
+            return Math.Max(0, montoEntregado - monto);
+        return 0;
+    }
 }
 
 public class Facturas
 {
-    private const decimal TASA_IVA = 0.19m;
-
     public int facturaId { get; set; }
     public string? numeroFactura { get; set; }
     public DateTime fechaEmision { get; set; }
@@ -332,16 +354,18 @@ public class Facturas
     public string? nit { get; set; }
 
     public int ventaId { get; set; }
-    public Ventas venta { get; set; }
+    public Ventas? venta { get; set; }
 
     public decimal CalcularImpuestos()
-        => subtotal * TASA_IVA;
+    {
+        decimal tasaIva = 0.19m; // IVA Colombia 19%
+        return subtotal * tasaIva;
+    }
 
     public decimal CalcularTotal()
-        => subtotal + CalcularImpuestos();
-
-    public static string GenerarNumeroFactura(int ventaId)
-        => $"FC-{DateTime.Now:yyyyMMdd}-{ventaId:D6}";
+    {
+        return subtotal + CalcularImpuestos();
+    }
 }
 
 public class Promociones
@@ -356,14 +380,15 @@ public class Promociones
     public List<Descuentos> descuentos { get; set; }
     public List<Pagos> pagos { get; set; }
 
-    public bool EstaVigente(DateTime? fecha = null)
+    public bool EstaVigente()
     {
-        var ahora = fecha ?? DateTime.Now;
-        return activa && ahora >= fechaInicio && ahora <= fechaFin;
+        return activa && DateTime.Now >= fechaInicio && DateTime.Now <= fechaFin;
     }
 
     public int DiasRestantes()
-        => (fechaFin - DateTime.Now).Days;
+    {
+        return (fechaFin - DateTime.Now).Days;
+    }
 }
 
 public class Descuentos
@@ -374,22 +399,25 @@ public class Descuentos
     public string? condicion { get; set; } // Estudiante, Tercera edad, etc.
 
     public int promocionId { get; set; }
-    public Promociones promocion { get; set; }
+    public Promociones? promocion { get; set; }
 
     public List<Boletos> boletos { get; set; }
 
     public decimal AplicarA(decimal precio)
     {
-        return tipo switch
-        {
-            "Porcentaje" => precio - (precio * valor / 100),
-            "Monto fijo" => Math.Max(0, precio - valor),
-            _            => precio
-        };
+        if (tipo == "Porcentaje")
+            return precio - (precio * valor / 100);
+
+        if (tipo == "Monto fijo")
+            return Math.Max(0, precio - valor);
+
+        return precio;
     }
 
-    public decimal MontoAhorro(decimal precioBase)
-        => precioBase - AplicarA(precioBase);
+    public decimal MontoAhorro(decimal precio)
+    {
+        return precio - AplicarA(precio);
+    }
 }
 
 public class Tarifas
@@ -403,39 +431,34 @@ public class Tarifas
     public List<Funciones> funciones { get; set; }
 
     public bool AplicaAFuncion(DateTime fechaHora)
-        => VerificarDia(fechaHora.DayOfWeek) && VerificarHorario(fechaHora.Hour);
+    {
+        bool diaOk = VerificarDia(fechaHora.DayOfWeek);
+        bool horarioOk = VerificarHorario(fechaHora.Hour);
+        return diaOk && horarioOk;
+    }
 
     private bool VerificarDia(DayOfWeek dia)
     {
         bool esFinDeSemana = dia == DayOfWeek.Saturday || dia == DayOfWeek.Sunday;
-        return diaSemana switch
-        {
-            "Lunes-Viernes" => !esFinDeSemana,
-            "Fin de semana" => esFinDeSemana,
-            _               => true
-        };
+
+        if (diaSemana == "Lunes-Viernes") return !esFinDeSemana;
+        if (diaSemana == "Fin de semana") return esFinDeSemana;
+        return true;
     }
 
     private bool VerificarHorario(int hora)
     {
-        return horarioTipo switch
-        {
-            "Mañana"   => hora >= 10 && hora < 14,
-            "Normal"   => hora >= 14 && hora < 20,
-            "Nocturna" => hora >= 20 || hora < 10,
-            _          => true
-        };
+        if (horarioTipo == "Mañana")   return hora >= 10 && hora < 14;
+        if (horarioTipo == "Normal")   return hora >= 14 && hora < 20;
+        if (horarioTipo == "Nocturna") return hora >= 20 || hora < 10;
+        return true;
     }
 
     public decimal PrecioConFormato(string formato)
     {
-        decimal recargo = formato switch
-        {
-            "3D"   => precioBase * 0.15m,
-            "IMAX" => precioBase * 0.30m,
-            _      => 0
-        };
-        return precioBase + recargo;
+        if (formato == "3D")   return precioBase + (precioBase * 0.15m);
+        if (formato == "IMAX") return precioBase + (precioBase * 0.30m);
+        return precioBase;
     }
 }
 
@@ -446,7 +469,7 @@ public class Confiterias
     public string? ubicacion { get; set; }
 
     public int cineId { get; set; }
-    public Cines cine { get; set; }
+    public Cines? cine { get; set; }
 
     public List<Productos> productos { get; set; }
     public List<Inventarios> inventarios { get; set; }
@@ -462,7 +485,7 @@ public class Productos
     public bool disponible { get; set; }
 
     public int confiteriaId { get; set; }
-    public Confiterias confiteria { get; set; }
+    public Confiterias? confiteria { get; set; }
 
     public List<Inventarios> inventarios { get; set; }
     public List<Ventas> ventas { get; set; }
@@ -476,16 +499,20 @@ public class Inventarios
     public DateTime ultimaActualizacion { get; set; }
 
     public int productoId { get; set; }
-    public Productos producto { get; set; }
+    public Productos? producto { get; set; }
 
     public int confiteriaId { get; set; }
-    public Confiterias confiteria { get; set; }
+    public Confiterias? confiteria { get; set; }
 
     public bool StockBajo()
-        => cantidadDisponible <= cantidadMinima;
+    {
+        return cantidadDisponible <= cantidadMinima;
+    }
 
     public int UnidadesParaReabastecer()
-        => Math.Max(0, cantidadMinima - cantidadDisponible);
+    {
+        return Math.Max(0, cantidadMinima - cantidadDisponible);
+    }
 
     public bool DescontarStock(int cantidad)
     {
@@ -519,10 +546,14 @@ public class Membresias
     public List<Descuentos> descuentos { get; set; }
 
     public bool EstaVigente()
-        => activa && DateTime.Now <= fechaVencimiento;
+    {
+        return activa && DateTime.Now <= fechaVencimiento;
+    }
 
     public int DiasParaVencer()
-        => Math.Max(0, (fechaVencimiento - DateTime.Now).Days);
+    {
+        return Math.Max(0, (fechaVencimiento - DateTime.Now).Days);
+    }
 
     public void AgregarPuntos(int puntos)
     {
@@ -538,5 +569,7 @@ public class Membresias
     }
 
     public decimal PrecioMensual()
-        => precioAnual / 12;
+    {
+        return precioAnual / 12;
+    }
 }
