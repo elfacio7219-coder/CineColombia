@@ -398,7 +398,7 @@ public class Tarifas
     public string? nombre { get; set; }
     public decimal precioBase { get; set; }
     public string? diaSemana { get; set; } // Lunes-Viernes, Fin de semana
-    public string? horarioTipo { get; set; } // Matiné, Normal, Nocturna
+    public string? horarioTipo { get; set; } // Mañana, Normal, Nocturna
 
     public List<Funciones> funciones { get; set; }
 
@@ -420,7 +420,7 @@ public class Tarifas
     {
         return horarioTipo switch
         {
-            "Matiné"   => hora >= 10 && hora < 14,
+            "Mañana"   => hora >= 10 && hora < 14,
             "Normal"   => hora >= 14 && hora < 20,
             "Nocturna" => hora >= 20 || hora < 10,
             _          => true
