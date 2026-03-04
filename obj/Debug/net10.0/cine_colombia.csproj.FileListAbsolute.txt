@@ -1,0 +1,15 @@
+C:\Users\Fabricio Sanchez\OneDrive\Desktop\cine_colombia\bin\Debug\net10.0\cine_colombia.exe
+C:\Users\Fabricio Sanchez\OneDrive\Desktop\cine_colombia\bin\Debug\net10.0\cine_colombia.deps.json
+C:\Users\Fabricio Sanchez\OneDrive\Desktop\cine_colombia\bin\Debug\net10.0\cine_colombia.runtimeconfig.json
+C:\Users\Fabricio Sanchez\OneDrive\Desktop\cine_colombia\bin\Debug\net10.0\cine_colombia.dll
+C:\Users\Fabricio Sanchez\OneDrive\Desktop\cine_colombia\bin\Debug\net10.0\cine_colombia.pdb
+C:\Users\Fabricio Sanchez\OneDrive\Desktop\cine_colombia\obj\Debug\net10.0\cine_colombia.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Fabricio Sanchez\OneDrive\Desktop\cine_colombia\obj\Debug\net10.0\cine_colombia.AssemblyInfoInputs.cache
+C:\Users\Fabricio Sanchez\OneDrive\Desktop\cine_colombia\obj\Debug\net10.0\cine_colombia.AssemblyInfo.cs
+C:\Users\Fabricio Sanchez\OneDrive\Desktop\cine_colombia\obj\Debug\net10.0\cine_colombia.csproj.CoreCompileInputs.cache
+C:\Users\Fabricio Sanchez\OneDrive\Desktop\cine_colombia\obj\Debug\net10.0\cine_colombia.sourcelink.json
+C:\Users\Fabricio Sanchez\OneDrive\Desktop\cine_colombia\obj\Debug\net10.0\cine_colombia.dll
+C:\Users\Fabricio Sanchez\OneDrive\Desktop\cine_colombia\obj\Debug\net10.0\refint\cine_colombia.dll
+C:\Users\Fabricio Sanchez\OneDrive\Desktop\cine_colombia\obj\Debug\net10.0\cine_colombia.pdb
+C:\Users\Fabricio Sanchez\OneDrive\Desktop\cine_colombia\obj\Debug\net10.0\cine_colombia.genruntimeconfig.cache
+C:\Users\Fabricio Sanchez\OneDrive\Desktop\cine_colombia\obj\Debug\net10.0\ref\cine_colombia.dll

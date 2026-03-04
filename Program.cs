@@ -6,20 +6,69 @@ Console.WriteLine("Cine Colombia");
 
 // ── DATOS DE PRUEBA ──────────────────────────────────────────
 
+var lista_cines = new List<Cines>();
+lista_cines.Add(new Cines() { cineId = 1, nombre = "Cine Colombia Centro", direccion = "Calle 19 #3-16", telefono = "6012345678", email = "centro@cinecolombia.com" });
+lista_cines.Add(new Cines() { cineId = 2, nombre = "Cine Colombia Norte",  direccion = "Av. 68 #100-10", telefono = "6019876543", email = "norte@cinecolombia.com" });
+
+var lista_generos = new List<Generos>();
+lista_generos.Add(new Generos() { generoId = 1, nombre = "Acción",           descripcion = "Películas de alto impacto visual y acción" });
+lista_generos.Add(new Generos() { generoId = 2, nombre = "Animación",        descripcion = "Películas animadas para toda la familia" });
+lista_generos.Add(new Generos() { generoId = 3, nombre = "Ciencia ficción",  descripcion = "Tramas basadas en ciencia y tecnología futurista" });
+
+var lista_salas = new List<Salas>();
+lista_salas.Add(new Salas() { salaId = 1, nombre = "Sala 1 - IMAX",   capacidad = 120, tipo = "IMAX",   cineId = 1 });
+lista_salas.Add(new Salas() { salaId = 2, nombre = "Sala 2 - 3D",     capacidad = 80,  tipo = "3D",     cineId = 1 });
+lista_salas.Add(new Salas() { salaId = 3, nombre = "Sala 3 - Normal", capacidad = 60,  tipo = "Normal", cineId = 2 });
+
+var lista_asientos = new List<Asientos>();
+lista_asientos.Add(new Asientos() { asientoId = 1, fila = "A", numero = 1, tipo = "Normal",       disponible = false, salaId = 1 });
+lista_asientos.Add(new Asientos() { asientoId = 2, fila = "A", numero = 2, tipo = "Normal",       disponible = false, salaId = 2 });
+lista_asientos.Add(new Asientos() { asientoId = 3, fila = "B", numero = 1, tipo = "VIP",          disponible = false, salaId = 1 });
+lista_asientos.Add(new Asientos() { asientoId = 4, fila = "B", numero = 2, tipo = "Preferencial", disponible = true,  salaId = 2 });
+
+var lista_empleados = new List<Empleados>();
+lista_empleados.Add(new Empleados() { empleadoId = 1, nombre = "Luis",    apellido = "Ramirez", cargo = "Taquillero", salario = 1800000, fechaContratacion = new DateTime(2022, 5, 10), cineId = 1 });
+lista_empleados.Add(new Empleados() { empleadoId = 2, nombre = "Andrea",  apellido = "Torres",  cargo = "Supervisor", salario = 2800000, fechaContratacion = new DateTime(2020, 3, 15), cineId = 1 });
+lista_empleados.Add(new Empleados() { empleadoId = 3, nombre = "Ricardo", apellido = "Mora",    cargo = "Confiteria", salario = 1600000, fechaContratacion = new DateTime(2023, 8, 1),  cineId = 2 });
+
 var lista_clientes = new List<Clientes>();
-lista_clientes.Add(new Clientes() { clienteId = 1, nombre = "Juan", apellido = "Perez",   email = "juan@email.com",   telefono = "3001234567", fechaNacimiento = new DateTime(1995, 3, 10), membresiaId = 1 });
-lista_clientes.Add(new Clientes() { clienteId = 2, nombre = "Maria", apellido = "Lopez",   email = "maria@email.com",  telefono = "3109876543", fechaNacimiento = new DateTime(2008, 7, 22), membresiaId = null });
-lista_clientes.Add(new Clientes() { clienteId = 3, nombre = "Carlos", apellido = "Gomez",  email = "carlos@email.com", telefono = "3205554433", fechaNacimiento = new DateTime(1958, 11, 5), membresiaId = 2 });
+lista_clientes.Add(new Clientes() { clienteId = 1, nombre = "Juan",   apellido = "Perez", email = "juan@email.com",   telefono = "3001234567", fechaNacimiento = new DateTime(1995, 3, 10),  membresiaId = 1    });
+lista_clientes.Add(new Clientes() { clienteId = 2, nombre = "Maria",  apellido = "Lopez", email = "maria@email.com",  telefono = "3109876543", fechaNacimiento = new DateTime(2008, 7, 22),  membresiaId = null });
+lista_clientes.Add(new Clientes() { clienteId = 3, nombre = "Carlos", apellido = "Gomez", email = "carlos@email.com", telefono = "3205554433", fechaNacimiento = new DateTime(1958, 11, 5), membresiaId = 2    });
 
 var lista_peliculas = new List<Peliculas>();
-lista_peliculas.Add(new Peliculas() { peliculaId = 1, titulo = "Avengers",      director = "Russo",    duracion = 181, clasificacion = "PG-13", fechaEstreno = new DateTime(2019, 4, 26), idioma = "Inglés", generoId = 1 });
-lista_peliculas.Add(new Peliculas() { peliculaId = 2, titulo = "El Rey Leon",   director = "Favreau",  duracion = 118, clasificacion = "G",     fechaEstreno = new DateTime(2019, 7, 19), idioma = "Español", generoId = 2 });
-lista_peliculas.Add(new Peliculas() { peliculaId = 3, titulo = "Inception",     director = "Nolan",    duracion = 148, clasificacion = "PG-13", fechaEstreno = new DateTime(2010, 7, 16), idioma = "Inglés", generoId = 3 });
+lista_peliculas.Add(new Peliculas() { peliculaId = 1, titulo = "Avengers",    director = "Russo",   duracion = 181, clasificacion = "PG-13", fechaEstreno = new DateTime(2019, 4, 26),  idioma = "Inglés",  generoId = 1 });
+lista_peliculas.Add(new Peliculas() { peliculaId = 2, titulo = "El Rey Leon", director = "Favreau", duracion = 118, clasificacion = "G",     fechaEstreno = new DateTime(2019, 7, 19),  idioma = "Español", generoId = 2 });
+lista_peliculas.Add(new Peliculas() { peliculaId = 3, titulo = "Inception",   director = "Nolan",   duracion = 148, clasificacion = "PG-13", fechaEstreno = new DateTime(2010, 7, 16),  idioma = "Inglés",  generoId = 3 });
 
 var lista_funciones = new List<Funciones>();
 lista_funciones.Add(new Funciones() { funcionId = 1, fechaHora = new DateTime(2026, 3, 10, 14, 0, 0), formato = "2D",   idioma = "Subtitulada", activa = true,  peliculaId = 1, salaId = 1, tarifaId = 1 });
 lista_funciones.Add(new Funciones() { funcionId = 2, fechaHora = new DateTime(2026, 3, 10, 18, 0, 0), formato = "3D",   idioma = "Doblada",     activa = true,  peliculaId = 2, salaId = 2, tarifaId = 2 });
 lista_funciones.Add(new Funciones() { funcionId = 3, fechaHora = new DateTime(2026, 3, 11, 20, 0, 0), formato = "IMAX", idioma = "Subtitulada", activa = false, peliculaId = 3, salaId = 1, tarifaId = 3 });
+
+var lista_membresias = new List<Membresias>();
+lista_membresias.Add(new Membresias() { membresiaId = 1, tipo = "Básica",  precioAnual = 120000, puntosAcumulados = 200,  fechaInicio = new DateTime(2025, 1, 1), fechaVencimiento = new DateTime(2026, 1, 1), activa = true  });
+lista_membresias.Add(new Membresias() { membresiaId = 2, tipo = "Premium", precioAnual = 280000, puntosAcumulados = 1500, fechaInicio = new DateTime(2025, 6, 1), fechaVencimiento = new DateTime(2027, 6, 1), activa = true  });
+lista_membresias.Add(new Membresias() { membresiaId = 3, tipo = "Gold",    precioAnual = 500000, puntosAcumulados = 0,    fechaInicio = new DateTime(2024, 1, 1), fechaVencimiento = new DateTime(2025, 1, 1), activa = false });
+
+var lista_descuentos = new List<Descuentos>();
+lista_descuentos.Add(new Descuentos() { descuentoId = 1, tipo = "Porcentaje", valor = 15,   condicion = "Estudiante",    promocionId = 1 });
+lista_descuentos.Add(new Descuentos() { descuentoId = 2, tipo = "Monto fijo", valor = 5000, condicion = "Tercera edad",  promocionId = 1 });
+
+var lista_tarifas = new List<Tarifas>();
+lista_tarifas.Add(new Tarifas() { tarifaId = 1, nombre = "Normal semana",    precioBase = 18000, diaSemana = "Lunes-Viernes", horarioTipo = "Normal"   });
+lista_tarifas.Add(new Tarifas() { tarifaId = 2, nombre = "Fin de semana 3D", precioBase = 22000, diaSemana = "Fin de semana", horarioTipo = "Normal"   });
+lista_tarifas.Add(new Tarifas() { tarifaId = 3, nombre = "IMAX Nocturna",    precioBase = 30000, diaSemana = "Fin de semana", horarioTipo = "Nocturna" });
+
+var lista_promociones = new List<Promociones>();
+lista_promociones.Add(new Promociones() { promocionId = 1, nombre = "Martes de descuento", descripcion = "15% en todas las funciones los martes",    fechaInicio = new DateTime(2026, 1, 1),   fechaFin = new DateTime(2026, 12, 31), activa = true  });
+lista_promociones.Add(new Promociones() { promocionId = 2, nombre = "Promo Estudiantes",   descripcion = "Descuento especial con carnet estudiantil", fechaInicio = new DateTime(2026, 2, 1),   fechaFin = new DateTime(2026, 6, 30),  activa = true  });
+lista_promociones.Add(new Promociones() { promocionId = 3, nombre = "Black Friday Cine",   descripcion = "50% en funciones nocturnas",                fechaInicio = new DateTime(2025, 11, 28), fechaFin = new DateTime(2025, 11, 30), activa = false });
+
+var lista_pagos = new List<Pagos>();
+lista_pagos.Add(new Pagos() { pagoId = 1, monto = 36700, metodoPago = "Tarjeta débito", fechaPago = new DateTime(2026, 3, 9), estado = "Aprobado",  referencia = "REF-001-2026", promocionId = null });
+lista_pagos.Add(new Pagos() { pagoId = 2, monto = 30000, metodoPago = "Efectivo",       fechaPago = new DateTime(2026, 3, 9), estado = "Aprobado",  referencia = "REF-002-2026", promocionId = null });
+lista_pagos.Add(new Pagos() { pagoId = 3, monto = 18000, metodoPago = "PSE",            fechaPago = new DateTime(2026, 3, 8), estado = "Rechazado", referencia = "REF-003-2026", promocionId = 1    });
 
 var lista_boletos = new List<Boletos>();
 lista_boletos.Add(new Boletos() { boletoId = 1, codigoQR = "QR001", precioBase = 18000, precioFinal = 18000, fechaEmision = new DateTime(2026, 3, 9), usado = false, funcionId = 1, asientoId = 1, ventaId = 1 });
@@ -30,29 +79,28 @@ var lista_ventas = new List<Ventas>();
 lista_ventas.Add(new Ventas() { ventaId = 1, fechaVenta = new DateTime(2026, 3, 9), total = 36700, canal = "Taquilla", clienteId = 1, empleadoId = 1, pagoId = 1 });
 lista_ventas.Add(new Ventas() { ventaId = 2, fechaVenta = new DateTime(2026, 3, 9), total = 30000, canal = "Web",      clienteId = 3, empleadoId = 1, pagoId = 2 });
 
+var lista_reservas = new List<Reservas>();
+lista_reservas.Add(new Reservas() { reservaId = 1, fechaReserva = new DateTime(2026, 3, 8, 10, 0, 0), fechaExpiracion = new DateTime(2026, 3, 8, 10, 30, 0), estado = "Confirmada", clienteId = 1, funcionId = 1 });
+lista_reservas.Add(new Reservas() { reservaId = 2, fechaReserva = new DateTime(2026, 3, 9, 15, 0, 0), fechaExpiracion = new DateTime(2026, 3, 9, 15, 30, 0), estado = "Pendiente",  clienteId = 2, funcionId = 2 });
+lista_reservas.Add(new Reservas() { reservaId = 3, fechaReserva = new DateTime(2026, 3, 9, 18, 0, 0), fechaExpiracion = new DateTime(2026, 3, 9, 18, 30, 0), estado = "Cancelada",  clienteId = 3, funcionId = 3 });
+
 var lista_productos = new List<Productos>();
-lista_productos.Add(new Productos() { productoId = 1, nombre = "Crispetas grandes", descripcion = "Crispetas de mantequilla", precio = 12000, categoria = "Comida",  disponible = true,  confiteriaId = 1 });
-lista_productos.Add(new Productos() { productoId = 2, nombre = "Gaseosa 500ml",     descripcion = "Gaseosa fria",            precio = 6000,  categoria = "Bebida",  disponible = true,  confiteriaId = 1 });
-lista_productos.Add(new Productos() { productoId = 3, nombre = "Combo duo",         descripcion = "Crispetas + Gaseosa",     precio = 16000, categoria = "Combo",   disponible = false, confiteriaId = 1 });
+lista_productos.Add(new Productos() { productoId = 1, nombre = "Crispetas grandes", descripcion = "Crispetas de mantequilla", precio = 12000, categoria = "Comida", disponible = true,  confiteriaId = 1 });
+lista_productos.Add(new Productos() { productoId = 2, nombre = "Gaseosa 500ml",     descripcion = "Gaseosa fria",            precio = 6000,  categoria = "Bebida", disponible = true,  confiteriaId = 1 });
+lista_productos.Add(new Productos() { productoId = 3, nombre = "Combo duo",         descripcion = "Crispetas + Gaseosa",     precio = 16000, categoria = "Combo",  disponible = false, confiteriaId = 1 });
 
 var lista_inventarios = new List<Inventarios>();
 lista_inventarios.Add(new Inventarios() { inventarioId = 1, productoId = 1, confiteriaId = 1, cantidadDisponible = 50, cantidadMinima = 10, ultimaActualizacion = DateTime.Now });
 lista_inventarios.Add(new Inventarios() { inventarioId = 2, productoId = 2, confiteriaId = 1, cantidadDisponible = 8,  cantidadMinima = 10, ultimaActualizacion = DateTime.Now });
 lista_inventarios.Add(new Inventarios() { inventarioId = 3, productoId = 3, confiteriaId = 1, cantidadDisponible = 0,  cantidadMinima = 5,  ultimaActualizacion = DateTime.Now });
 
-var lista_membresias = new List<Membresias>();
-lista_membresias.Add(new Membresias() { membresiaId = 1, tipo = "Básica",   precioAnual = 120000, puntosAcumulados = 200,  fechaInicio = new DateTime(2025, 1, 1),  fechaVencimiento = new DateTime(2026, 1, 1),  activa = true  });
-lista_membresias.Add(new Membresias() { membresiaId = 2, tipo = "Premium",  precioAnual = 280000, puntosAcumulados = 1500, fechaInicio = new DateTime(2025, 6, 1),  fechaVencimiento = new DateTime(2027, 6, 1),  activa = true  });
-lista_membresias.Add(new Membresias() { membresiaId = 3, tipo = "Gold",     precioAnual = 500000, puntosAcumulados = 0,    fechaInicio = new DateTime(2024, 1, 1),  fechaVencimiento = new DateTime(2025, 1, 1),  activa = false });
+var lista_confiterias = new List<Confiterias>();
+lista_confiterias.Add(new Confiterias() { confiteriaId = 1, nombre = "Confitería Principal", ubicacion = "Planta baja - Entrada principal", cineId = 1 });
+lista_confiterias.Add(new Confiterias() { confiteriaId = 2, nombre = "Confitería Norte",     ubicacion = "Segundo piso - Pasillo B",        cineId = 2 });
 
-var lista_descuentos = new List<Descuentos>();
-lista_descuentos.Add(new Descuentos() { descuentoId = 1, tipo = "Porcentaje", valor = 15, condicion = "Estudiante",    promocionId = 1 });
-lista_descuentos.Add(new Descuentos() { descuentoId = 2, tipo = "Monto fijo", valor = 5000, condicion = "Tercera edad", promocionId = 1 });
-
-var lista_tarifas = new List<Tarifas>();
-lista_tarifas.Add(new Tarifas() { tarifaId = 1, nombre = "Normal semana",    precioBase = 18000, diaSemana = "Lunes-Viernes", horarioTipo = "Normal"   });
-lista_tarifas.Add(new Tarifas() { tarifaId = 2, nombre = "Fin de semana 3D", precioBase = 22000, diaSemana = "Fin de semana", horarioTipo = "Normal"   });
-lista_tarifas.Add(new Tarifas() { tarifaId = 3, nombre = "IMAX Nocturna",    precioBase = 30000, diaSemana = "Fin de semana", horarioTipo = "Nocturna" });
+var lista_facturas = new List<Facturas>();
+lista_facturas.Add(new Facturas() { facturaId = 1, numeroFactura = "FAC-2026-001", fechaEmision = new DateTime(2026, 3, 9), subtotal = 30840m, impuestos = 5860m,  total = 36700m, razonSocial = "Juan Perez",   nit = "1020304050-1", ventaId = 1 });
+lista_facturas.Add(new Facturas() { facturaId = 2, numeroFactura = "FAC-2026-002", fechaEmision = new DateTime(2026, 3, 9), subtotal = 25210m, impuestos = 4790m,  total = 30000m, razonSocial = "Carlos Gomez", nit = "9876543210-2", ventaId = 2 });
 
 // ── MENÚ ────────────────────────────────────────────────────
 
@@ -63,17 +111,27 @@ while (!salir)
     Console.WriteLine("╔══════════════════════════════╗");
     Console.WriteLine("║      CINE COLOMBIA           ║");
     Console.WriteLine("╠══════════════════════════════╣");
-    Console.WriteLine("║  1. Ver clientes             ║");
-    Console.WriteLine("║  2. Ver películas            ║");
-    Console.WriteLine("║  3. Ver funciones activas    ║");
-    Console.WriteLine("║  4. Ver boletos              ║");
-    Console.WriteLine("║  5. Ver ventas               ║");
-    Console.WriteLine("║  6. Ver productos confitería ║");
-    Console.WriteLine("║  7. Ver inventario           ║");
-    Console.WriteLine("║  8. Ver membresías           ║");
-    Console.WriteLine("║  9. Ver descuentos           ║");
+    Console.WriteLine("║  1.  Ver clientes            ║");
+    Console.WriteLine("║  2.  Ver películas           ║");
+    Console.WriteLine("║  3.  Ver funciones activas   ║");
+    Console.WriteLine("║  4.  Ver boletos             ║");
+    Console.WriteLine("║  5.  Ver ventas              ║");
+    Console.WriteLine("║  6.  Ver productos confitería║");
+    Console.WriteLine("║  7.  Ver inventario          ║");
+    Console.WriteLine("║  8.  Ver membresías          ║");
+    Console.WriteLine("║  9.  Ver descuentos          ║");
     Console.WriteLine("║  10. Ver tarifas             ║");
-    Console.WriteLine("║  0. Salir                    ║");
+    Console.WriteLine("║  11. Ver cines               ║");
+    Console.WriteLine("║  12. Ver géneros             ║");
+    Console.WriteLine("║  13. Ver salas               ║");
+    Console.WriteLine("║  14. Ver asientos            ║");
+    Console.WriteLine("║  15. Ver empleados           ║");
+    Console.WriteLine("║  16. Ver confiterías         ║");
+    Console.WriteLine("║  17. Ver promociones         ║");
+    Console.WriteLine("║  18. Ver pagos               ║");
+    Console.WriteLine("║  19. Ver reservas            ║");
+    Console.WriteLine("║  20. Ver facturas            ║");
+    Console.WriteLine("║  0.  Salir                   ║");
     Console.WriteLine("╚══════════════════════════════╝");
     Console.Write("Seleccione una opción: ");
     string opcion = Console.ReadLine();
@@ -82,7 +140,7 @@ while (!salir)
     {
         Console.WriteLine("");
         Console.WriteLine("--- CLIENTES ---");
-        Console.WriteLine("ID | Nombre       | Apellido | Email                | Teléfono    | Fecha Nac.  | Membresía");
+        Console.WriteLine("ID | Nombre  | Apellido | Email                | Teléfono    | Fecha Nac.  | Membresía");
         foreach (var c in lista_clientes)
         {
             Console.WriteLine(c.clienteId + " | " +
@@ -98,7 +156,7 @@ while (!salir)
     {
         Console.WriteLine("");
         Console.WriteLine("--- PELÍCULAS ---");
-        Console.WriteLine("ID | Título           | Director  | Duración     | Clasificación | Estreno      | Idioma");
+        Console.WriteLine("ID | Título        | Director  | Duración     | Clasificación | Estreno      | Idioma");
         foreach (var p in lista_peliculas)
         {
             Console.WriteLine(p.peliculaId + " | " +
@@ -146,7 +204,7 @@ while (!salir)
     {
         Console.WriteLine("");
         Console.WriteLine("--- VENTAS ---");
-        Console.WriteLine("ID | Código  | Fecha        | Canal    | Total    | Cliente ID");
+        Console.WriteLine("ID | Código   | Fecha        | Canal    | Total  | Cliente ID");
         foreach (var v in lista_ventas)
         {
             Console.WriteLine(v.ventaId + " | " +
@@ -225,6 +283,152 @@ while (!salir)
                 t.precioBase + " | " +
                 t.diaSemana + " | " +
                 t.horarioTipo);
+        }
+    }
+    else if (opcion == "11")
+    {
+        Console.WriteLine("");
+        Console.WriteLine("--- CINES ---");
+        Console.WriteLine("ID | Nombre                    | Dirección            | Teléfono    | Email");
+        foreach (var c in lista_cines)
+        {
+            Console.WriteLine(c.cineId + " | " +
+                c.nombre + " | " +
+                c.direccion + " | " +
+                c.telefono + " | " +
+                c.email);
+        }
+    }
+    else if (opcion == "12")
+    {
+        Console.WriteLine("");
+        Console.WriteLine("--- GÉNEROS ---");
+        Console.WriteLine("ID | Nombre           | Descripción");
+        foreach (var g in lista_generos)
+        {
+            Console.WriteLine(g.generoId + " | " +
+                g.nombre + " | " +
+                g.descripcion);
+        }
+    }
+    else if (opcion == "13")
+    {
+        Console.WriteLine("");
+        Console.WriteLine("--- SALAS ---");
+        Console.WriteLine("ID | Nombre                | Capacidad | Tipo    | Cine ID");
+        foreach (var s in lista_salas)
+        {
+            Console.WriteLine(s.salaId + " | " +
+                s.nombre + " | " +
+                s.capacidad + " | " +
+                s.tipo + " | " +
+                s.cineId);
+        }
+    }
+    else if (opcion == "14")
+    {
+        Console.WriteLine("");
+        Console.WriteLine("--- ASIENTOS ---");
+        Console.WriteLine("ID | Fila | Número | Tipo          | Disponible | Sala ID");
+        foreach (var a in lista_asientos)
+        {
+            Console.WriteLine(a.asientoId + " | " +
+                a.fila + " | " +
+                a.numero + " | " +
+                a.tipo + " | " +
+                a.disponible + " | " +
+                a.salaId);
+        }
+    }
+    else if (opcion == "15")
+    {
+        Console.WriteLine("");
+        Console.WriteLine("--- EMPLEADOS ---");
+        Console.WriteLine("ID | Nombre   | Apellido | Cargo        | Salario   | Contratación  | Cine ID");
+        foreach (var e in lista_empleados)
+        {
+            Console.WriteLine(e.empleadoId + " | " +
+                e.nombre + " | " +
+                e.apellido + " | " +
+                e.cargo + " | " +
+                e.salario + " | " +
+                e.fechaContratacion.ToShortDateString() + " | " +
+                e.cineId);
+        }
+    }
+    else if (opcion == "16")
+    {
+        Console.WriteLine("");
+        Console.WriteLine("--- CONFITERÍAS ---");
+        Console.WriteLine("ID | Nombre                    | Ubicación                         | Cine ID");
+        foreach (var c in lista_confiterias)
+        {
+            Console.WriteLine(c.confiteriaId + " | " +
+                c.nombre + " | " +
+                c.ubicacion + " | " +
+                c.cineId);
+        }
+    }
+    else if (opcion == "17")
+    {
+        Console.WriteLine("");
+        Console.WriteLine("--- PROMOCIONES ---");
+        Console.WriteLine("ID | Nombre               | Inicio       | Fin          | Activa | Vigente");
+        foreach (var p in lista_promociones)
+        {
+            Console.WriteLine(p.promocionId + " | " +
+                p.nombre + " | " +
+                p.fechaInicio.ToShortDateString() + " | " +
+                p.fechaFin.ToShortDateString() + " | " +
+                p.activa + " | " +
+                p.EstaVigente());
+        }
+    }
+    else if (opcion == "18")
+    {
+        Console.WriteLine("");
+        Console.WriteLine("--- PAGOS ---");
+        Console.WriteLine("ID | Monto   | Método           | Fecha        | Estado     | Referencia");
+        foreach (var p in lista_pagos)
+        {
+            Console.WriteLine(p.pagoId + " | " +
+                p.monto + " | " +
+                p.metodoPago + " | " +
+                p.fechaPago.ToShortDateString() + " | " +
+                p.estado + " | " +
+                p.referencia);
+        }
+    }
+    else if (opcion == "19")
+    {
+        Console.WriteLine("");
+        Console.WriteLine("--- RESERVAS ---");
+        Console.WriteLine("ID | Fecha Reserva        | Expiración           | Estado      | Cliente ID | Función ID");
+        foreach (var r in lista_reservas)
+        {
+            Console.WriteLine(r.reservaId + " | " +
+                r.fechaReserva + " | " +
+                r.fechaExpiracion + " | " +
+                r.estado + " | " +
+                r.clienteId + " | " +
+                r.funcionId);
+        }
+    }
+    else if (opcion == "20")
+    {
+        Console.WriteLine("");
+        Console.WriteLine("--- FACTURAS ---");
+        Console.WriteLine("ID | Número           | Emisión      | Subtotal  | Impuestos | Total   | Razón Social  | NIT");
+        foreach (var f in lista_facturas)
+        {
+            Console.WriteLine(f.facturaId + " | " +
+                f.numeroFactura + " | " +
+                f.fechaEmision.ToShortDateString() + " | " +
+                f.subtotal + " | " +
+                f.impuestos + " | " +
+                f.total + " | " +
+                f.razonSocial + " | " +
+                f.nit);
         }
     }
     else if (opcion == "0")
