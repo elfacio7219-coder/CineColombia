@@ -102,344 +102,262 @@ var lista_facturas = new List<Facturas>();
 lista_facturas.Add(new Facturas() { facturaId = 1, numeroFactura = "FAC-2026-001", fechaEmision = new DateTime(2026, 3, 9), subtotal = 30840m, impuestos = 5860m,  total = 36700m, razonSocial = "Juan Perez",   nit = "1020304050-1", ventaId = 1 });
 lista_facturas.Add(new Facturas() { facturaId = 2, numeroFactura = "FAC-2026-002", fechaEmision = new DateTime(2026, 3, 9), subtotal = 25210m, impuestos = 4790m,  total = 30000m, razonSocial = "Carlos Gomez", nit = "9876543210-2", ventaId = 2 });
 
-// ── MENÚ ────────────────────────────────────────────────────
+// ── MOSTRAR TODAS LAS LISTAS AL INICIAR ─────────────────────
 
-bool salir = false;
-while (!salir)
+Console.WriteLine("");
+Console.WriteLine("--- CINES ---");
+Console.WriteLine("ID | Nombre                    | Dirección            | Teléfono    | Email");
+foreach (var c in lista_cines)
 {
-    Console.WriteLine("");
-    Console.WriteLine("╔══════════════════════════════╗");
-    Console.WriteLine("║      CINE COLOMBIA           ║");
-    Console.WriteLine("╠══════════════════════════════╣");
-    Console.WriteLine("║  1.  Ver clientes            ║");
-    Console.WriteLine("║  2.  Ver películas           ║");
-    Console.WriteLine("║  3.  Ver funciones activas   ║");
-    Console.WriteLine("║  4.  Ver boletos             ║");
-    Console.WriteLine("║  5.  Ver ventas              ║");
-    Console.WriteLine("║  6.  Ver productos confitería║");
-    Console.WriteLine("║  7.  Ver inventario          ║");
-    Console.WriteLine("║  8.  Ver membresías          ║");
-    Console.WriteLine("║  9.  Ver descuentos          ║");
-    Console.WriteLine("║  10. Ver tarifas             ║");
-    Console.WriteLine("║  11. Ver cines               ║");
-    Console.WriteLine("║  12. Ver géneros             ║");
-    Console.WriteLine("║  13. Ver salas               ║");
-    Console.WriteLine("║  14. Ver asientos            ║");
-    Console.WriteLine("║  15. Ver empleados           ║");
-    Console.WriteLine("║  16. Ver confiterías         ║");
-    Console.WriteLine("║  17. Ver promociones         ║");
-    Console.WriteLine("║  18. Ver pagos               ║");
-    Console.WriteLine("║  19. Ver reservas            ║");
-    Console.WriteLine("║  20. Ver facturas            ║");
-    Console.WriteLine("║  0.  Salir                   ║");
-    Console.WriteLine("╚══════════════════════════════╝");
-    Console.Write("Seleccione una opción: ");
-    string opcion = Console.ReadLine();
+    Console.WriteLine(c.cineId + " | " +
+        c.nombre + " | " +
+        c.direccion + " | " +
+        c.telefono + " | " +
+        c.email);
+}
 
-    if (opcion == "1")
-    {
-        Console.WriteLine("");
-        Console.WriteLine("--- CLIENTES ---");
-        Console.WriteLine("ID | Nombre  | Apellido | Email                | Teléfono    | Fecha Nac.  | Membresía");
-        foreach (var c in lista_clientes)
-        {
-            Console.WriteLine(c.clienteId + " | " +
-                c.nombre + " | " +
-                c.apellido + " | " +
-                c.email + " | " +
-                c.telefono + " | " +
-                c.fechaNacimiento.ToShortDateString() + " | " +
-                (c.membresiaId.HasValue ? "Sí (ID " + c.membresiaId + ")" : "No"));
-        }
-    }
-    else if (opcion == "2")
-    {
-        Console.WriteLine("");
-        Console.WriteLine("--- PELÍCULAS ---");
-        Console.WriteLine("ID | Título        | Director  | Duración     | Clasificación | Estreno      | Idioma");
-        foreach (var p in lista_peliculas)
-        {
-            Console.WriteLine(p.peliculaId + " | " +
-                p.titulo + " | " +
-                p.director + " | " +
-                p.DuracionFormateada() + " | " +
-                p.clasificacion + " | " +
-                p.fechaEstreno.ToShortDateString() + " | " +
-                p.idioma);
-        }
-    }
-    else if (opcion == "3")
-    {
-        Console.WriteLine("");
-        Console.WriteLine("--- FUNCIONES ACTIVAS ---");
-        Console.WriteLine("ID | Fecha y Hora         | Formato | Idioma       | Película ID | Sala ID | Tarifa ID");
-        foreach (var f in lista_funciones.Where(f => f.activa))
-        {
-            Console.WriteLine(f.funcionId + " | " +
-                f.fechaHora + " | " +
-                f.formato + " | " +
-                f.idioma + " | " +
-                f.peliculaId + " | " +
-                f.salaId + " | " +
-                f.tarifaId);
-        }
-    }
-    else if (opcion == "4")
-    {
-        Console.WriteLine("");
-        Console.WriteLine("--- BOLETOS ---");
-        Console.WriteLine("ID | QR    | Precio Base | Precio Final | Emision      | Usado | Función ID");
-        foreach (var b in lista_boletos)
-        {
-            Console.WriteLine(b.boletoId + " | " +
-                b.codigoQR + " | " +
-                b.precioBase + " | " +
-                b.precioFinal + " | " +
-                b.fechaEmision.ToShortDateString() + " | " +
-                b.usado + " | " +
-                b.funcionId);
-        }
-    }
-    else if (opcion == "5")
-    {
-        Console.WriteLine("");
-        Console.WriteLine("--- VENTAS ---");
-        Console.WriteLine("ID | Código   | Fecha        | Canal    | Total  | Cliente ID");
-        foreach (var v in lista_ventas)
-        {
-            Console.WriteLine(v.ventaId + " | " +
-                "FA00" + v.ventaId + " | " +
-                v.fechaVenta.ToShortDateString() + " | " +
-                v.canal + " | " +
-                v.total + " | " +
-                v.clienteId);
-        }
-    }
-    else if (opcion == "6")
-    {
-        Console.WriteLine("");
-        Console.WriteLine("--- PRODUCTOS CONFITERÍA ---");
-        Console.WriteLine("ID | Nombre              | Categoría | Precio  | Disponible");
-        foreach (var p in lista_productos)
-        {
-            Console.WriteLine(p.productoId + " | " +
-                p.nombre + " | " +
-                p.categoria + " | " +
-                p.precio + " | " +
-                p.disponible);
-        }
-    }
-    else if (opcion == "7")
-    {
-        Console.WriteLine("");
-        Console.WriteLine("--- INVENTARIO ---");
-        Console.WriteLine("ID | Producto ID | Disponible | Mínimo | Stock bajo");
-        foreach (var i in lista_inventarios)
-        {
-            Console.WriteLine(i.inventarioId + " | " +
-                i.productoId + " | " +
-                i.cantidadDisponible + " | " +
-                i.cantidadMinima + " | " +
-                i.StockBajo());
-        }
-    }
-    else if (opcion == "8")
-    {
-        Console.WriteLine("");
-        Console.WriteLine("--- MEMBRESÍAS ---");
-        Console.WriteLine("ID | Tipo    | Precio Anual | Puntos | Vencimiento  | Vigente");
-        foreach (var m in lista_membresias)
-        {
-            Console.WriteLine(m.membresiaId + " | " +
-                m.tipo + " | " +
-                m.precioAnual + " | " +
-                m.puntosAcumulados + " | " +
-                m.fechaVencimiento.ToShortDateString() + " | " +
-                m.EstaVigente());
-        }
-    }
-    else if (opcion == "9")
-    {
-        Console.WriteLine("");
-        Console.WriteLine("--- DESCUENTOS ---");
-        Console.WriteLine("ID | Tipo        | Valor | Condición");
-        foreach (var d in lista_descuentos)
-        {
-            Console.WriteLine(d.descuentoId + " | " +
-                d.tipo + " | " +
-                d.valor + " | " +
-                d.condicion);
-        }
-    }
-    else if (opcion == "10")
-    {
-        Console.WriteLine("");
-        Console.WriteLine("--- TARIFAS ---");
-        Console.WriteLine("ID | Nombre                | Precio Base | Día          | Horario");
-        foreach (var t in lista_tarifas)
-        {
-            Console.WriteLine(t.tarifaId + " | " +
-                t.nombre + " | " +
-                t.precioBase + " | " +
-                t.diaSemana + " | " +
-                t.horarioTipo);
-        }
-    }
-    else if (opcion == "11")
-    {
-        Console.WriteLine("");
-        Console.WriteLine("--- CINES ---");
-        Console.WriteLine("ID | Nombre                    | Dirección            | Teléfono    | Email");
-        foreach (var c in lista_cines)
-        {
-            Console.WriteLine(c.cineId + " | " +
-                c.nombre + " | " +
-                c.direccion + " | " +
-                c.telefono + " | " +
-                c.email);
-        }
-    }
-    else if (opcion == "12")
-    {
-        Console.WriteLine("");
-        Console.WriteLine("--- GÉNEROS ---");
-        Console.WriteLine("ID | Nombre           | Descripción");
-        foreach (var g in lista_generos)
-        {
-            Console.WriteLine(g.generoId + " | " +
-                g.nombre + " | " +
-                g.descripcion);
-        }
-    }
-    else if (opcion == "13")
-    {
-        Console.WriteLine("");
-        Console.WriteLine("--- SALAS ---");
-        Console.WriteLine("ID | Nombre                | Capacidad | Tipo    | Cine ID");
-        foreach (var s in lista_salas)
-        {
-            Console.WriteLine(s.salaId + " | " +
-                s.nombre + " | " +
-                s.capacidad + " | " +
-                s.tipo + " | " +
-                s.cineId);
-        }
-    }
-    else if (opcion == "14")
-    {
-        Console.WriteLine("");
-        Console.WriteLine("--- ASIENTOS ---");
-        Console.WriteLine("ID | Fila | Número | Tipo          | Disponible | Sala ID");
-        foreach (var a in lista_asientos)
-        {
-            Console.WriteLine(a.asientoId + " | " +
-                a.fila + " | " +
-                a.numero + " | " +
-                a.tipo + " | " +
-                a.disponible + " | " +
-                a.salaId);
-        }
-    }
-    else if (opcion == "15")
-    {
-        Console.WriteLine("");
-        Console.WriteLine("--- EMPLEADOS ---");
-        Console.WriteLine("ID | Nombre   | Apellido | Cargo        | Salario   | Contratación  | Cine ID");
-        foreach (var e in lista_empleados)
-        {
-            Console.WriteLine(e.empleadoId + " | " +
-                e.nombre + " | " +
-                e.apellido + " | " +
-                e.cargo + " | " +
-                e.salario + " | " +
-                e.fechaContratacion.ToShortDateString() + " | " +
-                e.cineId);
-        }
-    }
-    else if (opcion == "16")
-    {
-        Console.WriteLine("");
-        Console.WriteLine("--- CONFITERÍAS ---");
-        Console.WriteLine("ID | Nombre                    | Ubicación                         | Cine ID");
-        foreach (var c in lista_confiterias)
-        {
-            Console.WriteLine(c.confiteriaId + " | " +
-                c.nombre + " | " +
-                c.ubicacion + " | " +
-                c.cineId);
-        }
-    }
-    else if (opcion == "17")
-    {
-        Console.WriteLine("");
-        Console.WriteLine("--- PROMOCIONES ---");
-        Console.WriteLine("ID | Nombre               | Inicio       | Fin          | Activa | Vigente");
-        foreach (var p in lista_promociones)
-        {
-            Console.WriteLine(p.promocionId + " | " +
-                p.nombre + " | " +
-                p.fechaInicio.ToShortDateString() + " | " +
-                p.fechaFin.ToShortDateString() + " | " +
-                p.activa + " | " +
-                p.EstaVigente());
-        }
-    }
-    else if (opcion == "18")
-    {
-        Console.WriteLine("");
-        Console.WriteLine("--- PAGOS ---");
-        Console.WriteLine("ID | Monto   | Método           | Fecha        | Estado     | Referencia");
-        foreach (var p in lista_pagos)
-        {
-            Console.WriteLine(p.pagoId + " | " +
-                p.monto + " | " +
-                p.metodoPago + " | " +
-                p.fechaPago.ToShortDateString() + " | " +
-                p.estado + " | " +
-                p.referencia);
-        }
-    }
-    else if (opcion == "19")
-    {
-        Console.WriteLine("");
-        Console.WriteLine("--- RESERVAS ---");
-        Console.WriteLine("ID | Fecha Reserva        | Expiración           | Estado      | Cliente ID | Función ID");
-        foreach (var r in lista_reservas)
-        {
-            Console.WriteLine(r.reservaId + " | " +
-                r.fechaReserva + " | " +
-                r.fechaExpiracion + " | " +
-                r.estado + " | " +
-                r.clienteId + " | " +
-                r.funcionId);
-        }
-    }
-    else if (opcion == "20")
-    {
-        Console.WriteLine("");
-        Console.WriteLine("--- FACTURAS ---");
-        Console.WriteLine("ID | Número           | Emisión      | Subtotal  | Impuestos | Total   | Razón Social  | NIT");
-        foreach (var f in lista_facturas)
-        {
-            Console.WriteLine(f.facturaId + " | " +
-                f.numeroFactura + " | " +
-                f.fechaEmision.ToShortDateString() + " | " +
-                f.subtotal + " | " +
-                f.impuestos + " | " +
-                f.total + " | " +
-                f.razonSocial + " | " +
-                f.nit);
-        }
-    }
-    else if (opcion == "0")
-    {
-        Console.WriteLine("Hasta luego!");
-        salir = true;
-    }
-    else
-    {
-        Console.WriteLine("Opción no válida, intente de nuevo.");
-    }
+Console.WriteLine("");
+Console.WriteLine("--- GÉNEROS ---");
+Console.WriteLine("ID | Nombre           | Descripción");
+foreach (var g in lista_generos)
+{
+    Console.WriteLine(g.generoId + " | " +
+        g.nombre + " | " +
+        g.descripcion);
+}
+
+Console.WriteLine("");
+Console.WriteLine("--- SALAS ---");
+Console.WriteLine("ID | Nombre                | Capacidad | Tipo    | Cine ID");
+foreach (var s in lista_salas)
+{
+    Console.WriteLine(s.salaId + " | " +
+        s.nombre + " | " +
+        s.capacidad + " | " +
+        s.tipo + " | " +
+        s.cineId);
+}
+
+Console.WriteLine("");
+Console.WriteLine("--- ASIENTOS ---");
+Console.WriteLine("ID | Fila | Número | Tipo          | Disponible | Sala ID");
+foreach (var a in lista_asientos)
+{
+    Console.WriteLine(a.asientoId + " | " +
+        a.fila + " | " +
+        a.numero + " | " +
+        a.tipo + " | " +
+        a.disponible + " | " +
+        a.salaId);
+}
+
+Console.WriteLine("");
+Console.WriteLine("--- EMPLEADOS ---");
+Console.WriteLine("ID | Nombre   | Apellido | Cargo        | Salario   | Contratación  | Cine ID");
+foreach (var e in lista_empleados)
+{
+    Console.WriteLine(e.empleadoId + " | " +
+        e.nombre + " | " +
+        e.apellido + " | " +
+        e.cargo + " | " +
+        e.salario + " | " +
+        e.fechaContratacion.ToShortDateString() + " | " +
+        e.cineId);
+}
+
+Console.WriteLine("");
+Console.WriteLine("--- CLIENTES ---");
+Console.WriteLine("ID | Nombre  | Apellido | Email                | Teléfono    | Fecha Nac.  | Membresía");
+foreach (var c in lista_clientes)
+{
+    Console.WriteLine(c.clienteId + " | " +
+        c.nombre + " | " +
+        c.apellido + " | " +
+        c.email + " | " +
+        c.telefono + " | " +
+        c.fechaNacimiento.ToShortDateString() + " | " +
+        (c.membresiaId.HasValue ? "Sí (ID " + c.membresiaId + ")" : "No"));
+}
+
+Console.WriteLine("");
+Console.WriteLine("--- PELÍCULAS ---");
+Console.WriteLine("ID | Título        | Director  | Duración     | Clasificación | Estreno      | Idioma");
+foreach (var p in lista_peliculas)
+{
+    Console.WriteLine(p.peliculaId + " | " +
+        p.titulo + " | " +
+        p.director + " | " +
+        p.DuracionFormateada() + " | " +
+        p.clasificacion + " | " +
+        p.fechaEstreno.ToShortDateString() + " | " +
+        p.idioma);
+}
+
+Console.WriteLine("");
+Console.WriteLine("--- FUNCIONES ---");
+Console.WriteLine("ID | Fecha y Hora         | Formato | Idioma       | Película ID | Sala ID | Tarifa ID | Activa");
+foreach (var f in lista_funciones)
+{
+    Console.WriteLine(f.funcionId + " | " +
+        f.fechaHora + " | " +
+        f.formato + " | " +
+        f.idioma + " | " +
+        f.peliculaId + " | " +
+        f.salaId + " | " +
+        f.tarifaId + " | " +
+        f.activa);
+}
+
+Console.WriteLine("");
+Console.WriteLine("--- MEMBRESÍAS ---");
+Console.WriteLine("ID | Tipo    | Precio Anual | Puntos | Vencimiento  | Vigente");
+foreach (var m in lista_membresias)
+{
+    Console.WriteLine(m.membresiaId + " | " +
+        m.tipo + " | " +
+        m.precioAnual + " | " +
+        m.puntosAcumulados + " | " +
+        m.fechaVencimiento.ToShortDateString() + " | " +
+        m.EstaVigente());
+}
+
+Console.WriteLine("");
+Console.WriteLine("--- DESCUENTOS ---");
+Console.WriteLine("ID | Tipo        | Valor | Condición");
+foreach (var d in lista_descuentos)
+{
+    Console.WriteLine(d.descuentoId + " | " +
+        d.tipo + " | " +
+        d.valor + " | " +
+        d.condicion);
+}
+
+Console.WriteLine("");
+Console.WriteLine("--- TARIFAS ---");
+Console.WriteLine("ID | Nombre                | Precio Base | Día          | Horario");
+foreach (var t in lista_tarifas)
+{
+    Console.WriteLine(t.tarifaId + " | " +
+        t.nombre + " | " +
+        t.precioBase + " | " +
+        t.diaSemana + " | " +
+        t.horarioTipo);
+}
+
+Console.WriteLine("");
+Console.WriteLine("--- PROMOCIONES ---");
+Console.WriteLine("ID | Nombre               | Inicio       | Fin          | Activa | Vigente");
+foreach (var p in lista_promociones)
+{
+    Console.WriteLine(p.promocionId + " | " +
+        p.nombre + " | " +
+        p.fechaInicio.ToShortDateString() + " | " +
+        p.fechaFin.ToShortDateString() + " | " +
+        p.activa + " | " +
+        p.EstaVigente());
+}
+
+Console.WriteLine("");
+Console.WriteLine("--- PAGOS ---");
+Console.WriteLine("ID | Monto   | Método           | Fecha        | Estado     | Referencia");
+foreach (var p in lista_pagos)
+{
+    Console.WriteLine(p.pagoId + " | " +
+        p.monto + " | " +
+        p.metodoPago + " | " +
+        p.fechaPago.ToShortDateString() + " | " +
+        p.estado + " | " +
+        p.referencia);
+}
+
+Console.WriteLine("");
+Console.WriteLine("--- BOLETOS ---");
+Console.WriteLine("ID | QR    | Precio Base | Precio Final | Emision      | Usado | Función ID");
+foreach (var b in lista_boletos)
+{
+    Console.WriteLine(b.boletoId + " | " +
+        b.codigoQR + " | " +
+        b.precioBase + " | " +
+        b.precioFinal + " | " +
+        b.fechaEmision.ToShortDateString() + " | " +
+        b.usado + " | " +
+        b.funcionId);
+}
+
+Console.WriteLine("");
+Console.WriteLine("--- VENTAS ---");
+Console.WriteLine("ID | Código   | Fecha        | Canal    | Total  | Cliente ID");
+foreach (var v in lista_ventas)
+{
+    Console.WriteLine(v.ventaId + " | " +
+        "FA00" + v.ventaId + " | " +
+        v.fechaVenta.ToShortDateString() + " | " +
+        v.canal + " | " +
+        v.total + " | " +
+        v.clienteId);
+}
+
+Console.WriteLine("");
+Console.WriteLine("--- RESERVAS ---");
+Console.WriteLine("ID | Fecha Reserva        | Expiración           | Estado      | Cliente ID | Función ID");
+foreach (var r in lista_reservas)
+{
+    Console.WriteLine(r.reservaId + " | " +
+        r.fechaReserva + " | " +
+        r.fechaExpiracion + " | " +
+        r.estado + " | " +
+        r.clienteId + " | " +
+        r.funcionId);
+}
+
+Console.WriteLine("");
+Console.WriteLine("--- PRODUCTOS CONFITERÍA ---");
+Console.WriteLine("ID | Nombre              | Categoría | Precio  | Disponible");
+foreach (var p in lista_productos)
+{
+    Console.WriteLine(p.productoId + " | " +
+        p.nombre + " | " +
+        p.categoria + " | " +
+        p.precio + " | " +
+        p.disponible);
+}
+
+Console.WriteLine("");
+Console.WriteLine("--- INVENTARIO ---");
+Console.WriteLine("ID | Producto ID | Disponible | Mínimo | Stock bajo");
+foreach (var i in lista_inventarios)
+{
+    Console.WriteLine(i.inventarioId + " | " +
+        i.productoId + " | " +
+        i.cantidadDisponible + " | " +
+        i.cantidadMinima + " | " +
+        i.StockBajo());
+}
+
+Console.WriteLine("");
+Console.WriteLine("--- CONFITERÍAS ---");
+Console.WriteLine("ID | Nombre                    | Ubicación                         | Cine ID");
+foreach (var c in lista_confiterias)
+{
+    Console.WriteLine(c.confiteriaId + " | " +
+        c.nombre + " | " +
+        c.ubicacion + " | " +
+        c.cineId);
+}
+
+Console.WriteLine("");
+Console.WriteLine("--- FACTURAS ---");
+Console.WriteLine("ID | Número           | Emisión      | Subtotal  | Impuestos | Total   | Razón Social  | NIT");
+foreach (var f in lista_facturas)
+{
+    Console.WriteLine(f.facturaId + " | " +
+        f.numeroFactura + " | " +
+        f.fechaEmision.ToShortDateString() + " | " +
+        f.subtotal + " | " +
+        f.impuestos + " | " +
+        f.total + " | " +
+        f.razonSocial + " | " +
+        f.nit);
 }
 
 // ── CLASES ───────────────────────────────────────────────────
