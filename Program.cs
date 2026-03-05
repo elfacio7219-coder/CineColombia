@@ -4,7 +4,6 @@ using System.Linq;
 
 Console.WriteLine("Cine Colombia");
 
-// ── DATOS DE PRUEBA ──────────────────────────────────────────
 
 var lista_cines = new List<Cines>();
 lista_cines.Add(new Cines() { cineId = 1, nombre = "Cine Colombia Centro", direccion = "Calle 19 #3-16", telefono = "6012345678", email = "centro@cinecolombia.com" });
@@ -102,7 +101,7 @@ var lista_facturas = new List<Facturas>();
 lista_facturas.Add(new Facturas() { facturaId = 1, numeroFactura = "FAC-2026-001", fechaEmision = new DateTime(2026, 3, 9), subtotal = 30840m, impuestos = 5860m,  total = 36700m, razonSocial = "Juan Perez",   nit = "1020304050-1", ventaId = 1 });
 lista_facturas.Add(new Facturas() { facturaId = 2, numeroFactura = "FAC-2026-002", fechaEmision = new DateTime(2026, 3, 9), subtotal = 25210m, impuestos = 4790m,  total = 30000m, razonSocial = "Carlos Gomez", nit = "9876543210-2", ventaId = 2 });
 
-// ── MOSTRAR TODAS LAS LISTAS AL INICIAR ─────────────────────
+// ── MOSTRAR TODAS LAS LISTAS 
 
 Console.WriteLine("");
 Console.WriteLine("--- CINES ---");
